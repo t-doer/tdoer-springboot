@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.tdoer</groupId>
+        <artifactId>tdoer-parent-pom</artifactId>
+        <version>1.0.0-RELEASE</version>
+        <relativePath/> <!-- lookupApplication parent from repository -->
+    </parent>
+
+    <groupId>com.tdoer</groupId>
+    <artifactId>tdoer-springboot</artifactId>
+    <version>1.0.0-RELEASE</version>
+    <name>T-Doer Springboot</name>
+    <description>T-Doer Bridge Layer on Springboot</description>
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <scm>
+        <tag>master</tag>
+        <url>https://github.com/t-doer/tdoer-springboot.git</url>
+        <connection>scm:git:https://github.com/t-doer/tdoer-springboot.git</connection>
+        <developerConnection>scm:git:https://github.com/t-doer/tdoer-springboot.git</developerConnection>
+    </scm>
+    <developers>
+        <developer>
+            <name>Htinker Hu</name>
+            <email>htinker@163.com</email>
+            <organization>t-doer</organization>
+        </developer>
+    </developers>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis.spring.boot</groupId>
+            <artifactId>mybatis-spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
