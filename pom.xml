@@ -13,7 +13,7 @@
 
     <groupId>com.tdoer</groupId>
     <artifactId>tdoer-springboot</artifactId>
-    <version>1.0.1-RELEASE</version>
+    <version>1.0.2-RELEASE</version>
     <name>T-Doer Springboot</name>
     <description>T-Doer Bridge Layer on Springboot</description>
     <licenses>
