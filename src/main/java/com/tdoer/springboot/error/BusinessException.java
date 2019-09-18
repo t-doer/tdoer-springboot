@@ -26,7 +26,7 @@ public class BusinessException extends ErrorCodeException {
         super(errorCode);
     }
 
-    public BusinessException(int errorCode, String errorMessage){
+    public BusinessException(String errorMessage, int errorCode) {
         super(errorCode, errorMessage);
     }
 
@@ -34,11 +34,11 @@ public class BusinessException extends ErrorCodeException {
         super(errorCode, cause, null);
     }
 
-    public BusinessException(int errorCode, Object... formatArgs){
+    public BusinessException(int errorCode, Object... formatArgs) {
         super(errorCode, null, formatArgs);
     }
 
-    public BusinessException(int errorCode, Throwable cause, Object... messageFormatArgs){
+    public BusinessException(int errorCode, Throwable cause, Object... messageFormatArgs) {
         super(errorCode, cause, messageFormatArgs);
     }
 
