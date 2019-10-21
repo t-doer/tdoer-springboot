@@ -55,7 +55,7 @@ public class StatusCodesRegistrar implements ApplicationListener<ApplicationStar
                 if(errorCodes != null){
                     for(Class<? extends StatusCodes> errorCode : errorCodes){
                         logger.debug("Found StatusCodes class: {}", errorCode.getName());
-                        registerStatusCodes(errorCode);
+                        StatusCodeUtil.registerStatusCodes(errorCode);
                     }
                 }else{
                     logger.debug("No any StatusCodes class found.");
@@ -65,23 +65,4 @@ public class StatusCodesRegistrar implements ApplicationListener<ApplicationStar
         }
     }
 
-    protected void registerStatusCodes(Class<? extends StatusCodes> statusCodes){
-        for(Field field: statusCodes.getFields()){
-            ReasonPhrase reasonPhrase = field.getAnnotation(ReasonPhrase.class);
-            if(reasonPhrase != null){
-                try{
-                    setStatusCode(field.getInt(null), reasonPhrase.value());
-                }catch (IllegalAccessException iae){
-                    logger.warn("Failed to get value of the field: {}", field.getName());
-                }
-            }else{
-                logger.warn("No ReasonPhrase annoation declared for the field: {}", field.getName());
-            }
-
-        }
-    }
-
-    protected void setStatusCode(int statusCode, String reasonPhrase){
-        StatusCodeUtil.registryStatusCode(statusCode, reasonPhrase);
-    }
 }

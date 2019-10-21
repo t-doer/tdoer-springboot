@@ -15,10 +15,14 @@
  */
 package com.tdoer.springboot.util;
 
+import com.tdoer.springboot.annotation.ReasonPhrase;
 import com.tdoer.springboot.http.StatusCodes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
+
+import java.lang.reflect.Field;
+
 /**
  * @author Htinker Hu (htinker@163.com)
  * @create 2017-09-19
@@ -27,6 +31,22 @@ public class StatusCodeUtil {
     private static Logger logger = LoggerFactory.getLogger(StatusCodeUtil.class);
 
     private static final String PREFIX = "__STATUS_CODE_";
+
+    public static void registerStatusCodes(Class<? extends StatusCodes> statusCodes){
+        for(Field field: statusCodes.getFields()){
+            ReasonPhrase reasonPhrase = field.getAnnotation(ReasonPhrase.class);
+            if(reasonPhrase != null){
+                try{
+                    registryStatusCode(field.getInt(null), reasonPhrase.value());
+                }catch (IllegalAccessException iae){
+                    logger.warn("Failed to get value of the field: {}", field.getName());
+                }
+            }else{
+                logger.warn("No ReasonPhrase annoation declared for the field: {}", field.getName());
+            }
+
+        }
+    }
 
     public static void registryStatusCode(int statusCode, String reasonPhrase){
         System.setProperty(key(statusCode), reasonPhrase);
