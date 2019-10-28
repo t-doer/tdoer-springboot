@@ -15,6 +15,7 @@
  */
 package com.tdoer.springboot.service;
 
+import com.tdoer.springboot.error.TooManyRecordsException;
 import com.tdoer.springboot.mapper.IBaseMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,18 +26,28 @@ import java.util.List;
  * @Description base service implement
  * @create 2019-10-05
  */
-public class BaseServiceImpl<PK, E, M extends IBaseMapper<PK, E>> implements IBaseService<E> {
+public class BaseServiceImpl<PK, E, M extends IBaseMapper<PK, E>> implements IBaseService<PK, E> {
     @Autowired
     public M mapper;
 
     @Override
-    public void save(E entity) {
-        mapper.insertSelective(entity);
+    public int insert(E entity) {
+        return mapper.insert(entity);
     }
 
     @Override
-    public void update(E entity) {
-        mapper.updateByPrimaryKeySelective(entity);
+    public int save(E entity) {
+        return mapper.saveOrUpdate(entity);
+    }
+
+    @Override
+    public int update(E entity) {
+        return mapper.updateByPrimaryKeySelective(entity);
+    }
+
+    @Override
+    public E getById(PK id) {
+        return mapper.selectByPrimaryKey(id);
     }
 
     @Override
@@ -46,7 +57,7 @@ public class BaseServiceImpl<PK, E, M extends IBaseMapper<PK, E>> implements IBa
             return null;
         }
         if (list.size() > 1) {
-            throw new RuntimeException("select result too many records");
+            throw new TooManyRecordsException();
         }
         return list.get(0);
     }
