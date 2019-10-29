@@ -28,8 +28,6 @@ public interface IBaseMapper <PK, E>{
 
     int insert(E record);
 
-    int saveOrUpdate(E record);
-
     int insertSelective(E record);
 
     E selectByPrimaryKey(PK id);
@@ -37,6 +35,10 @@ public interface IBaseMapper <PK, E>{
     int updateByPrimaryKeySelective(E record);
 
     int updateByPrimaryKey(E record);
+
+    long countByEntityPrimaryKey(E record);
+
+    List<E> selectAll();
 
     List<E> selectByExample(E record);
 }

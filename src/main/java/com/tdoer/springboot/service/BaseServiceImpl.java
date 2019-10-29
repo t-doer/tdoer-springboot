@@ -37,7 +37,11 @@ public class BaseServiceImpl<PK, E, M extends IBaseMapper<PK, E>> implements IBa
 
     @Override
     public int save(E entity) {
-        return mapper.saveOrUpdate(entity);
+        if (mapper.countByEntityPrimaryKey(entity) > 0) {
+            return update(entity);
+        } else {
+            return insert(entity);
+        }
     }
 
     @Override
@@ -69,6 +73,6 @@ public class BaseServiceImpl<PK, E, M extends IBaseMapper<PK, E>> implements IBa
 
     @Override
     public List<E> findAll() {
-        return findListByExample(null);
+        return mapper.selectAll();
     }
 }
